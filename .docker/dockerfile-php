@@ -1,0 +1,65 @@
+# Set our arguments
+
+ARG PHP_VERSION
+ARG APP_ENV
+
+FROM php:$PHP_VERSION
+
+ENV CFLAGS="-I/usr/src/php"
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
+
+# Install base libs
+RUN apk update && apk add \
+    autoconf file g++ gcc libc-dev pkgconf re2c make \
+	openssl \
+	git \
+	zip \
+	unzip \
+	tzdata \
+	supervisor \
+	mysql-client \
+	libpng \
+	jpeg \
+	freetype \
+	libmcrypt-dev libxml2-dev libpng-dev zlib-dev jpeg-dev freetype-dev libzip-dev --no-cache
+
+#RUN git clone https://github.com/nikic/php-ast.git && cd php-ast && phpize && ./configure && make && make install && cd .. && rm -rf php-ast && docker-php-ext-enable ast
+
+# Set timezone
+RUN cp /usr/share/zoneinfo/Europe/Riga /etc/localtime
+RUN echo "Europe/Riga" > /etc/timezone
+
+# Install php extensions
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" gd pdo pdo_mysql mbstring tokenizer bcmath fileinfo xml xmlwriter xmlreader
+
+# Configure zip
+RUN docker-php-ext-configure zip --with-libzip && docker-php-ext-install zip
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Surpass composer error when running from root
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Set our working directory
+WORKDIR /app
+
+# Copy our composer files before project files, so the process goes faster
+COPY ./composer.json ./
+COPY ./composer.lock ./
+
+# Run composer install without autoload so docker could cache the packages
+RUN composer install --prefer-dist  --no-progress --no-interaction --no-suggest --no-scripts --no-autoloader
+
+# Copy our project files into container
+COPY ./ ./
+COPY ./.docker/crontab /usr/crontab
+COPY ./.docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Run composer install to autoload cache packages
+RUN composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest
+
+# Cleanup
+RUN apk del autoconf g++ make openssl-dev libxml2-dev libmcrypt-dev libpng-dev jpeg-dev freetype-dev
+RUN rm -rf /tmp/*

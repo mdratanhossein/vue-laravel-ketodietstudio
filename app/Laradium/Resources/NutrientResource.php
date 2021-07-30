@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Laradium\Resources;
+
+use App\Nutrient;
+use Laradium\Laradium\Base\AbstractResource;
+use Laradium\Laradium\Base\FieldSet;
+use Laradium\Laradium\Base\Resource;
+use Laradium\Laradium\Base\ColumnSet;
+use Laradium\Laradium\Base\Table;
+
+class NutrientResource extends AbstractResource
+{
+
+    /**
+     * @var string
+     */
+    protected $resource = Nutrient::class;
+
+    protected $actions = ['edit','create'];
+
+    /**
+     * @return Resource
+     */
+    public function resource()
+    {
+        return (new Resource)->make(function (FieldSet $set) {
+            $set->text('name');
+        });
+    }
+
+    /**
+     * @return Table
+     */
+    public function table()
+    {
+        return (new Table)->make(function (ColumnSet $column) {
+            $column->add('id', '#ID');
+            $column->add('name');
+        });
+    }
+}

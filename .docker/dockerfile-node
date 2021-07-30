@@ -1,0 +1,14 @@
+FROM node:12.13.0-alpine
+
+# Create destination directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Copy the app, note .dockerignore
+COPY . /app
+
+RUN npm install
+
+RUN npm run prod
+
+RUN node --version

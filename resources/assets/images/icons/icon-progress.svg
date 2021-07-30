@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="14px" viewBox="0 0 24 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Chart 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-114.000000, -196.000000)">
+            <g id="Chart-2" transform="translate(114.000000, 191.000000)">
+                <rect id="Rectangle" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="24" height="24"></rect>
+                <polygon id="Shape" fill="#56468F" fill-rule="nonzero" points="21.85 6.8 21.85 12.65 23.65 12.65 23.65 5 16 5 16 6.8"></polygon>
+                <path d="M22.5,5 L14.561,12.939 C14.4482632,13.051809 14.2955926,13.1150759 14.1363961,13.1150759 C13.9771996,13.1150759 13.824529,13.051809 13.711996,12.9392039 L10.5837922,9.811 C10.1338646,9.36078394 9.52318217,9.1077163 8.8863961,9.1077163 C8.24961004,9.1077163 7.63892756,9.36078394 7.18879611,9.81120395 L3.55271368e-15,17 L1.27279221,18.2727922 L8.46179221,11.0837922 C8.57452899,10.9709832 8.72719963,10.9077163 8.8863961,10.9077163 C9.04559258,10.9077163 9.19826322,10.9709832 9.31079611,11.0835883 L12.439,14.2117922 C12.8889277,14.6620083 13.4996101,14.9150759 14.1363961,14.9150759 C14.7731821,14.9150759 15.3838645,14.6620083 15.833996,14.2115883 L23.7727922,6.27279221 L22.5,5 Z" id="Shape" fill="#56468F" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

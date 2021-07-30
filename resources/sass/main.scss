@@ -1,0 +1,46 @@
+/*=========================================================================================
+  File Name: main.scss
+  Description: Main scss file. Imports other scss partials from 'vuexy' folder
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy Admin - VueJS Dashboard Admin Template
+  Author: Pixinvent
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+@import "vuexy/variables";
+
+@import "vuexy/layout";
+@import "vuexy/typography";
+@import "vuexy/misc";
+@import "vuexy/extraComponents";
+
+@import "vuexy/transitions";
+
+@import "vuexy/customClasses";
+
+// Vuesax fixes and enhancments
+@import "vuexy/fixesVuesax";
+
+// Tailwind Fixes
+@import "vuexy/tailwindFix";
+
+// rtl
+@import "vuexy/rtl";
+
+// keto Icons
+@import "keto/main";
+
+@import "/vuexy/components/vxCard.scss";
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
